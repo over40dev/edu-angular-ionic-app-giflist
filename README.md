@@ -1,2 +1,3 @@
-# cx-starter-angular-ionic-app
-cx-starter-app | angular8 | ionic4 (from tutorial by Josh Morony https://www.joshmorony.com/)
+# giflist sample app from Josh Morony Angular8 Ionic4 book
+
+!(https://github.com/over40dev/edu-ionic4-giflist)
