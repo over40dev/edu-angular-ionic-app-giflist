@@ -1,5 +1,5 @@
 {
-  "appId": "com.cogentx.giflist",
+  "appId": "dev.over40.giflist",
   "appName": "giflist",
   "bundledWebRuntime": false,
   "npmClient": "npm",

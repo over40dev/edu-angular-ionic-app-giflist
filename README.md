@@ -1,3 +1,3 @@
-# giflist sample app from Josh Morony Angular8 Ionic4 book
+# giflist sample app from Angular8 Ionic4 book by 
 
-!(https://github.com/over40dev/edu-ionic4-giflist)
+[Josh Morony](https://www.joshmorony.com)
