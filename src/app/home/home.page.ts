@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SettingsPage } from '../settings/settings.page';
 import { DataService } from '../services/data.service';
 import { RedditService } from '../services/reddit.service';
+import { Key } from 'protractor';
 
 const { Browser, Keyboard } = Plugins;
 
@@ -27,7 +28,24 @@ export class HomePage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.redditService.load();
+
+    this.subredditForm
+      .get('subredditControl')
+      .valueChanges.pipe(
+        debounceTime(1500),
+        distinctUntilChanged()
+      )
+      .subscribe((subreddit: any) => {
+        if (subreddit.length > 0) {
+          this.redditService.changeSubReddit(subreddit);
+          Keyboard.hide().catch(err=> {
+            console.warn(err);
+          });
+        }
+      });
+  }
 
   showComments(post): void {}
 

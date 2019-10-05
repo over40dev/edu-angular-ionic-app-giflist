@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-title>
-      <ion-searchbar
-        placeholder="subreddit..."
-      ></ion-searchbar>
+      <form [formGroup]="subredditForm">
+        <ion-searchbar
+          placeholder="subreddit..."
+          formControlName="subredditControl"
+          value=""
+        ></ion-searchbar>
+      </form>
     </ion-title>
 
     <ion-buttons slot="end">
