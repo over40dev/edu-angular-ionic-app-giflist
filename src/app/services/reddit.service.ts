@@ -27,8 +27,13 @@ export class RedditService {
   }
 
   load(): void {
-    // this.dataService.getData();
-    this.fetchData();
+    this.dataService.getSettingsReddit()
+      .then(settingsReddit => {
+        if (!!settingsReddit) {
+          this.settings = settingsReddit;
+        }
+        this.fetchData();
+      });
   }
 
   fetchData(): void {
@@ -135,9 +140,17 @@ export class RedditService {
       );
   }
 
-  nextPage(): void {}
+  nextPage(): void {
+    this.page++;
+    this.fetchData();
+  }
 
-  resetPosts(): void {}
+  resetPosts(): void {
+    this.page = 1;
+    this.posts = [];
+    this.after = null;
+    this.fetchData();
+  }
 
   changeSubReddit(subreddit): void {}
 }
