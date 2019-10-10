@@ -47,11 +47,34 @@ export class HomePage implements OnInit {
       });
   }
 
-  showComments(post): void {}
+  showComments(post): void {
+    Browser.open({
+      toolbarColor: '#fff',
+      url: `https://reddit.com${post.data.permalink}`,
+      windowName: '_system'
+    });
+  }
 
   openSettings(): void {}
 
-  playVideo(e, post): void {}
+  playVideo(e, post): void {
+    // Create a reference to the video
+    const video = e.target;
 
-  loadMore(): void {}
+    // Toggle the video playing
+    if (video.paused) {
+      // Show the loader gif
+      video.play();
+
+      video.addEventListener('playing', () => {
+        console.log('playing video');
+      });
+    } else {
+      video.pause();
+    }
+  }
+
+  loadMore(): void {
+    this.redditService.nextPage();
+  }
 }
