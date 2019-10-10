@@ -40,18 +40,41 @@ export class HomePage implements OnInit {
       .subscribe((subreddit: any) => {
         if (subreddit.length > 0) {
           this.redditService.changeSubReddit(subreddit);
-          Keyboard.hide().catch(err=> {
+          Keyboard.hide().catch(err => {
             console.warn(err);
           });
         }
       });
   }
 
-  showComments(post): void {}
+  showComments(post): void {
+    Browser.open({
+      toolbarColor: '#fff',
+      url: `https://reddit.com${post.data.permalink}`,
+      windowName: '_system'
+    });
+  }
 
   openSettings(): void {}
 
-  playVideo(e, post): void {}
+  playVideo(e, post): void {
+    // Create a reference to the video
+    const video = e.target;
 
-  loadMore(): void {}
+    // Toggle the video playing
+    if (video.paused) {
+      // Show the loader gif
+      video.play();
+
+      video.addEventListener('playing', () => {
+        console.log('playing video');
+      });
+    } else {
+      video.pause();
+    }
+  }
+
+  loadMore(): void {
+    this.redditService.nextPage();
+  }
 }
