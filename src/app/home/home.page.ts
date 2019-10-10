@@ -40,7 +40,7 @@ export class HomePage implements OnInit {
       .subscribe((subreddit: any) => {
         if (subreddit.length > 0) {
           this.redditService.changeSubReddit(subreddit);
-          Keyboard.hide().catch(err=> {
+          Keyboard.hide().catch(err => {
             console.warn(err);
           });
         }

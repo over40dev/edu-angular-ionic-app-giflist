@@ -5,8 +5,8 @@
         <ion-searchbar
           placeholder="subreddit..."
           formControlName="subredditControl"
-          value=""
-        ></ion-searchbar>
+          value="">
+        </ion-searchbar>
       </form>
     </ion-title>
 
@@ -20,12 +20,21 @@
 
 <ion-content>
   <ion-list lines="none">
-    <div tappable>
+    <div 
+      tappable
+      (click)="playVideo($event, post)"
+      *ngFor="let post of redditService.posts">
       <ion-item>
-        GIF GOES HERE
+        <video 
+          loop
+          [poster]="post.data.snapshot"
+          [src]="post.data.url">
+        </video>
       </ion-item>
-      <ion-list-header>
-        <ion-label>TITLE GOES HERE</ion-label>
+      <ion-list-header
+        (click)="showComments(post)"
+        style="text-align: left;">
+        <ion-label>{{ post.data.title }}</ion-label>
       </ion-list-header>
     </div>
 
@@ -34,5 +43,12 @@
     </ion-item>
   </ion-list>
 
-  <ion-button color="light" expand="full" (click)="loadMore()">Load More...</ion-button>
+  <ion-button 
+    color="light" 
+    expand="full" 
+    (click)="loadMore()" 
+    expand="full"
+    *ngIf="redditService.posts.length">
+    Load More...
+  </ion-button>
 </ion-content>
