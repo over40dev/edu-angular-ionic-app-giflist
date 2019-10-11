@@ -24,3 +24,9 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.ios ion-title {
+  padding-left: 0;
+  padding-right: 35px;
+  padding-bottom: 5px;
+}
