@@ -152,5 +152,8 @@ export class RedditService {
     this.fetchData();
   }
 
-  changeSubReddit(subreddit): void {}
+  changeSubReddit(subreddit): void {
+    this.settings.subReddit = subreddit;
+    this.resetPosts();
+  }
 }

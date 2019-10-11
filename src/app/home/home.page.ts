@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Plugins } from '@capacitor/core';
@@ -15,7 +15,7 @@ const { Browser, Keyboard } = Plugins;
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   public subredditForm: FormGroup;
 
   constructor(
@@ -28,25 +28,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.redditService.load();
-
-    this.subredditForm
-      .get('subredditControl')
-      .valueChanges.pipe(
-        debounceTime(1500),
-        distinctUntilChanged()
-      )
-      .subscribe((subreddit: any) => {
-        if (subreddit.length > 0) {
-          this.redditService.changeSubReddit(subreddit);
-          Keyboard.hide().catch(err => {
-            console.warn(err);
-          });
-        }
-      });
-  }
-
   showComments(post): void {
     Browser.open({
       toolbarColor: '#fff',
@@ -55,7 +36,18 @@ export class HomePage implements OnInit {
     });
   }
 
-  openSettings(): void {}
+  openSettings(): void {
+    this.modalCtrl.create({
+      component: SettingsPage
+    })
+    .then(modal => {
+      modal.onDidDismiss()
+        .then(() => {
+          this.redditService.resetPosts();
+        });
+      modal.present();
+    });
+  }
 
   playVideo(e, post): void {
     // Create a reference to the video

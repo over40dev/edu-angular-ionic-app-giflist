@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RedditService } from '../services/reddit.service';
+import { DataService } from '../services/data.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
+export class SettingsPage {
 
-  constructor() { }
+  constructor(
+    public redditService: RedditService,
+    private dataService: DataService,
+    private modalCtrl: ModalController,
+  ) { }
 
-  ngOnInit() {
+  save(): void {
+    const {perPage, sort, subReddit} = this.redditService.settings;
+    this.dataService.save({perPage, sort, subReddit});
+
+    this.close();
   }
 
+  close(): void {
+    this.modalCtrl.dismiss();
+  }
 }
