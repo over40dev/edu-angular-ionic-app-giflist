@@ -8,7 +8,7 @@ export class DataService {
 
   constructor(private storage: Storage) { }
 
-  getData(): Promise<any> {
+  getSettingsReddit(): Promise<any> {
     return this.storage.get('settings');
   }
 
